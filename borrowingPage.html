@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Ride</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="navbar">
+            <div>
+                <!-- Logo untuk aplikasi Red Ride -->
+                <img src="assets/uh-logo.png" width="200" alt="logo">
+            </div>
+            <div>
+                <ul>
+                    <!-- Menu navigasi untuk berbagai bagian aplikasi -->
+                    <li class="garis-hover"><a href="#bikeList">Bike List</a></li>
+                    <li class="garis-hover"><a href="#activeLoans">Active Rentals</a></li>
+                    <li class="garis-hover"><a href="#queueSection">Queues</a></li>
+                    <li class="garis-hover"><a href="#historyTable">Histories</a></li>
+                </ul>    
+            </div>
+            <div>
+                <!-- Tombol untuk kembali ke halaman utama -->
+                <a href="landingPage.html" class="btn-nav">Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="bikeList" class="container smt">
+        <h2>Bike List</h2>
+        <div class="wrapper">
+            <div id="bikes" class="row">
+                <!-- Kartu sepeda akan dibuat secara dinamis di sini -->
+            </div>
+        </div>
+    
+        <div class="card smt py-4 mb-5 mx-5">
+            <div class="d-flex justify-content-between align-items-center mx-5">
+                <h3>Admin Management</h3>
+                <button class="btn btn-red" id="edit-bike" data-toggle="modal" data-target="#adminLoginModal">Manage Bicycle Data</button>    
+            </div>
+            <div>
+                <p class="mb-0 ml-5">Add a new bicycle to the list or change its status if it's being repaired or maintained</p>    
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Form Peminjaman -->
+    <div class="modal fade" id="borrowModal" tabindex="-1" aria-labelledby="borrowModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="borrowModalLabel">Borrow Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="borrowForm" onsubmit="return submitForm(event)">
+                        <div class="form-group">
+                            <label for="name">Borrower's Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="identityType">Identity Card Type</label>
+                            <select class="form-control" id="identityType" required>
+                                <option value="ID Card" selected>ID Card</option>
+                                <option value="Student Card">Student Card</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="number" class="form-control" id="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="borrowDate">Borrow Date</label>
+                            <input type="text" class="form-control" id="borrowDate" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="startTime">Borrow Time</label>
+                            <input type="text" class="form-control" id="startTime" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">Return Time</label>
+                            <input type="text" class="form-control" id="endTime" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Form Antrian -->
+    <div class="modal fade" id="queueModal" tabindex="-1" aria-labelledby="queueModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="queueModalLabel">Queue Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="queueForm" onsubmit="return submitQueueForm(event)">
+                        <div class="form-group">
+                            <label for="queueName">Name</label>
+                            <input type="text" class="form-control" id="queueName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="queueIdentityType">Identity Card Type</label>
+                            <select class="form-control" id="queueIdentityType" required>
+                                <option value="ID Card">ID Card</option>
+                                <option value="Student Card">Student Card</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="queuePhone">Phone Number</label>
+                            <input type="number" class="form-control" id="queuePhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="queueTime">Queue Time</label>
+                            <input type="text" class="form-control" id="queueTime" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-success">Queue</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Pengembalian -->
+    <div class="modal fade text-center" id="returnModal" tabindex="-1" aria-labelledby="returnModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="returnModalLabel">Return Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="returnMessage"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="returnOkButton" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal untuk Login Admin -->
+    <div class="modal fade text-center" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="adminLoginModalLabel">Admin Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminLoginForm" onsubmit="return validateAdminLogin(event)">
+                        <div class="form-group">
+                            <label for="adminName">User Admin:</label>
+                            <input type="text" class="form-control" id="adminName" name="adminName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adminPassword">Password Admin:</label>
+                            <input type="password" class="form-control" id="adminPassword" name="adminPassword" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="adminLoginForm">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabel untuk peminjaman aktif -->
+    <div id="activeLoans" class="smt">
+        <h2>Active Rentals</h2>
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Borrow Date</th>
+                        <th>Borrower's Name</th>
+                        <th>Identity Card Type</th>
+                        <th>Phone Number</th>
+                        <th>Borrow Time</th>
+                        <th>Return Time</th>
+                        <th>Bike ID</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="activeLoansBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Tabel untuk antrian -->
+    <div id="queueSection" class="smt">
+        <h2>Borrowing Queue</h2>
+        <div class="table-container">
+            <table class="table table-striped" id="queueTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Bicycle</th>
+                        <th>Queue Time</th>
+                        <th>Cancel</th>
+                    </tr>
+                </thead>
+                <tbody id="queueList"></tbody>
+            </table>    
+        </div>
+    </div>
+
+    <!-- Tabel untuk riwayat peminjaman -->
+    <div id="historyTable" class="smt">
+        <h2>Borrowing History</h2>
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Borrow Date</th>
+                        <th>Borrower's Name</th>
+                        <th>Identity Card Type</th>
+                        <th>Phone Number</th>
+                        <th>Borrow Time</th>
+                        <th>Return Time</th>
+                        <th>Bike ID</th>
+                        <th>Penalty (Rp)</th>
+                    </tr>
+                </thead>
+                <tbody id="historyBody"></tbody>
+            </table>    
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <img src="assets/white-bike.png" alt="sepeda" width="20px">
+            <span class="copyright">&copy 2024 Red Ride. <br> All Rights Reserved.</span>
+        </div>
+        <div>
+            <a href="tel:+628115003636" class="text-white d-flex align-items-center">
+                <img src="assets/wa.png" alt="whatsapp" width="35">
+                <span>+62 811 5003636</span>
+            </a>
+            <a href="mailto:office@unhas.ac.id" class="text-white d-flex align-items-center">
+                <img src="assets/email.png" alt="globe" width="35">
+                <span>office@unhas.ac.id</span>
+            </a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

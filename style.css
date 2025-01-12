@@ -1,0 +1,373 @@
+html,
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+.btn-nav {
+    border-radius: 20px;
+    padding: 5px 25px;
+    font-size: 20px;
+    color: white;
+    border: 1px solid white;
+}
+
+.btn-nav:hover {
+    color: #C11E3B;
+    border-radius: 20px;
+    background-color: white;
+    text-decoration: none;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.garis-hover {
+    text-decoration: none;
+    position: relative;
+}
+
+.garis-hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.garis-hover:hover::after {
+    width: 100%;
+}
+
+.hero-section {
+    background-image: url(assets/uh.png);
+    background-repeat: no-repeat;
+    width: fit-content;
+}
+
+.btn-vd {
+    padding: 0 15px;
+    border-radius: 25px;
+    border: 2px solid #C11E3B;
+    background-color: white;
+    margin-right: 10px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.btn-vd a {
+    color: #C11E3B;
+    font-size: 18px;
+}
+
+.btn-vd:hover {
+    padding: 0 15px;
+    border-radius: 25px;
+    border: 2px solid white;
+    background-color: #c11e3b;
+    margin-right: 10px;
+}
+
+.btn-vd a:hover {
+    color: white;
+}
+
+
+.btn-borrow-hero {
+    padding: 0 15px;
+    border-radius: 25px;
+    border: 2px solid white;
+    background-color: transparent;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.btn-borrow-hero a {
+    color: white;
+    font-size: 18px;
+}
+
+.btn-borrow-hero:hover {
+    color: white;
+    border-color: white;
+    border-radius: 25px;
+    background-color: #C11E3B;
+}
+
+.navbar {
+    width: 100%;
+    background-color: #c11e3b;
+    align-items: center;
+    z-index: 1000;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+}
+
+.navbar div {
+    margin: 0 30px;
+}
+
+.navbar div img {
+    flex: 0 0 auto;
+    width: 200px;
+}
+
+.navbar ul {
+    margin: 0;
+    display: flex;
+    list-style: none;
+}
+
+.navbar ul li a {
+    font-size: 18px;
+    text-decoration: none;
+    padding: 26px 20px;
+    color: white;
+}
+
+.hero {
+    margin-top: 70px;
+}
+
+#bikeList {
+    margin-top: 50px;
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 64px;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(45deg, #ffffff, red, #ffffff);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: darkShine 3s ease-in infinite;
+}
+
+@keyframes darkShine {
+    0% {
+        background-position: -100%;
+    }
+
+    100% {
+        background-position: 100%;
+    }
+}
+
+h5 {
+    font-size: 30px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0;
+}
+
+h2 {
+    font-size: 40px;
+    text-align: center;
+    color: #99172f;
+    font-weight: bold;
+    padding: 4rem 0 2rem 0;
+}
+
+h4 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#about {
+    background: linear-gradient(to bottom, #6d4048, #d9a8b1, #fFFFFF);
+    justify-content: center;
+    color: #99172f;
+    display: flex;
+}
+
+.about-container {
+    width: 900px;
+    background-color: white;
+    padding: 70px;
+    margin: 100px 0 50px 0;
+    border: 3px solid #99172f;
+    border-radius: 40px;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-container h2 {
+    text-align: start;
+    padding: 0;
+}
+
+.about-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    justify-content: center;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text p {
+    text-align: justify;
+    font-size: 20px;
+}
+
+.row {
+    width: 90%;
+}
+
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.card {
+    margin-bottom: 15px;
+    border-radius: 25px;
+    border-color: #99172f;
+    border-width: 2px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.btn-red {
+    background-color: #99172f;
+    color: white;
+}
+
+.btn-red:hover {
+    background-color: #c11e3b;
+    color: white;
+}
+
+.table-container {
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 5rem;
+}
+
+.table {
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+.table-striped thead {
+    background-color: white;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8e8eb;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: white;
+}
+
+#activeLoans,
+#historyTable {
+    background-color: #eeeeee;
+}
+
+.smt {
+    scroll-margin-top: 60px;
+}
+
+#how-to-borrow {
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 70px;
+    scroll-margin-top: 60px;
+    text-align: center;
+    max-width: 1100px;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 70px;
+}
+
+#how-to-borrow h2 {
+    padding: 0 0 40px 0;
+}
+
+.borrow-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    row-gap: 20px;
+}
+
+
+.card-text {
+    font-size: 15px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.footer {
+    background-color: #99172f;
+    padding: 10px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.footer-left img {
+    width: 80px;
+    margin-right: 10px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+#borrowModal {
+    overflow-y: auto;
+}
+
+/* #edit-bike {
+    margin: auto;
+    width: 200px;
+} */
+
+.c-pink {
+    background-color: #916e75;
+    color: #ffffff;
+}
+
+.c-pink:hover {
+    background-color: #ad7d87;
+    color: #ffffff;
+}
+
+.mb-8 {
+    margin-bottom: 80px;
+}
+
+.admin-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    justify-content: center;
+    width: 100%;
+}

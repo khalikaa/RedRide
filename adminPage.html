@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Ride - Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigasi -->
+    <nav>
+        <div class="navbar">
+            <div>
+                <img src="assets/uh-logo.png" width="200" alt="logo">
+            </div>
+            <div>
+                <ul>
+                    <li class="garis-hover"><a href="#bikeListAdmin">Bike List</a></li>
+                    <li class="garis-hover"><a href="#addBike">Add Bike</a></li>
+                </ul>
+            </div>
+            <div>
+                <a href="borrowingPage.html" class="btn-nav mx-2">Borrowing Page</a>
+                <a href="landingPage.html" class="btn-nav">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Admin Panel: Manage Bikes</h2>
+
+        <!-- Bike List and Add Bike Container-->
+        <div class="admin-container">
+            <!-- Bike list -->
+            <div class="card p-3 mb-5 smt" id="bikeListAdmin">
+                <div class="card-body">
+                    <h5 class="text-center font-weight-bold mb-3">Bike List</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Bike ID</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bikeList">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <!-- Form untuk menambah sepeda -->
+                <div class="card smt" id="addBike">
+                    <div class="card-body p-4">
+                        <h5 class="text-center font-weight-bold mb-3">Add Bike</h5>
+                        <form id="addBikeForm">
+                            <div class="form-group">
+                                <label for="bikeName">Bike ID</label>
+                                <input type="text" class="form-control" id="bikeName" placeholder="Enter Bike ID"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="bikeStatus">Bike Status</label>
+                                <select class="form-control" id="bikeStatus" required>
+                                    <option value="Available">Available</option>
+                                    <option value="In Maintenance">In Maintenance</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-red">Add New Bike</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">
+            <img src="assets/white-bike.png" alt="sepeda" width="20px">
+            <span class="copyright">&copy 2024 Red Ride. <br> All Rights Reserved.</span>
+        </div>
+        <div>
+            <a href="tel:+628115003636" class="text-white d-flex align-items-center">
+                <img src="assets/wa.png" alt="whatsapp" width="35">
+                <span>+62 811 5003636</span>
+            </a>
+            <a href="mailto:office@unhas.ac.id" class="text-white d-flex align-items-center">
+                <img src="assets/email.png" alt="globe" width="35">
+                <span>office@unhas.ac.id</span>
+            </a>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        // Event listener untuk form penambahan sepeda
+        document.getElementById('addBikeForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const bikeName = document.getElementById('bikeName').value.trim();
+            const bikeStatus = document.getElementById('bikeStatus').value;
+
+            // Validasi input
+            if (bikeName === '') {
+                alert('Bike ID cannot be empty.');
+                return;
+            }
+
+            // Cek apakah Bike ID sudah ada dalam daftar
+            const isDuplicate = bikes.some(bike => bike.id === bikeName);
+            if (isDuplicate) {
+                alert('Bike ID already exists. Please use a different ID.');
+                return;
+            }
+
+            // Menambahkan sepeda baru
+            addBike(bikeName, bikeStatus);
+
+            // Reset form setelah menambah sepeda
+            document.getElementById('addBikeForm').reset();
+        });
+
+        // Memastikan daftar sepeda dirender saat halaman admin dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAdminBikes();
+        });
+    </script>
+</body>
+
+</html>
